@@ -25,15 +25,26 @@ var EventApplication = React.createClass({
     events.push(event);
     this.setState({ events: events });
   },
+  handleUpdateRecord: function(old_event, event) {
+    var events = this.state.events.slice();
+    var index = events.indexOf(old_event);
+    events.splice(index, 1, event);
+    this.setState({ events: events });
+  },
+  handleDeleteRecord: function(event) {
+    var events = this.state.events.slice();
+    var index = events.indexOf(event);
+    events.splice(index, 1);
+    this.setState({ events: events });
+  },
   render: function() {
     return(
       <div className="container">
         <h2 className="mt-2">Events</h2>
-        
         <div className="row">
-
+          <div className="col-md-12">
             <NewForm handleAdd={this.handleAdd} />
-          
+          </div>
         </div>
         <div className="row">
           <div className="col-md-4">
@@ -42,7 +53,9 @@ var EventApplication = React.createClass({
         </div>
         <div className="row">
           <div className="col-md-12">
-            <EventTable events={this.state.events} />
+            <EventTable events={this.state.events}
+                        handleUpdateRecord={this.handleUpdateRecord}
+                        handleDeleteRecord={this.handleDeleteRecord} />
           </div>
         </div>
       </div>
