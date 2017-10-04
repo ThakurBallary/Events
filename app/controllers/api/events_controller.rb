@@ -24,12 +24,12 @@ module Api
 		end
 
 		def update
-      if @event.update(event_params)
-        render json: @event
-      else
-        render nothing: true, status: :unprocessable_entity
-      end
-    end
+	      if @event.update(event_params)
+	        render json: @event
+	      else
+	        render nothing: true, status: :unprocessable_entity
+	      end
+	    end
 
 		def destroy
 			@event.destroy

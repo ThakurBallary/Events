@@ -1,6 +1,8 @@
 var EventApplication = React.createClass({
   getInitialState: function() {
-    return { events: [] };
+    return { events: [],
+             sort: "name",
+             order: "asc" };
   },
   componentDidMount: function() {
     this.getDataFromApi();
@@ -37,10 +39,26 @@ var EventApplication = React.createClass({
     events.splice(index, 1);
     this.setState({ events: events });
   },
+  handleSortColumn: function(name, order) {
+    if (this.state.sort != name) {
+      order = 'asc';
+    }
+    $.ajax({
+      url: '/api/events',
+      data: { sort_by: name, order: order },
+      method: 'GET',
+      success: function(data) {
+        this.setState({ events: data, sort: name, order: order });
+      }.bind(this),
+      error: function(xhr, status, error) {
+        alert('Cannot sort events: ', error);
+      }
+    });
+  },
   render: function() {
     return(
       <div className="container">
-        <h2 className="mt-2">Events</h2>
+        <h4 className="mt-2">Events</h4>
         <div className="row">
           <div className="col-md-12">
             <NewForm handleAdd={this.handleAdd} />
@@ -54,8 +72,11 @@ var EventApplication = React.createClass({
         <div className="row">
           <div className="col-md-12">
             <EventTable events={this.state.events}
+                        sort={this.state.sort}
+                        order={this.state.order}
                         handleUpdateRecord={this.handleUpdateRecord}
-                        handleDeleteRecord={this.handleDeleteRecord} />
+                        handleDeleteRecord={this.handleDeleteRecord}
+                        handleSortColumn={this.handleSortColumn} />
           </div>
         </div>
       </div>
