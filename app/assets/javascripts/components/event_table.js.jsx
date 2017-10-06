@@ -2,8 +2,8 @@ var EventTable = React.createClass({
   handleUpdateRecord: function(old_event, event) {
     this.props.handleUpdateRecord(old_event, event);
   },
-  handleDeleteRecord: function(event) {
-    this.props.handleDeleteRecord(event);
+  handleDeleteRecord: function() {
+    this.props.handleDeleteRecord();
   },
   handleSortColumn: function(name, order) {
     this.props.handleSortColumn(name, order);

@@ -2,17 +2,20 @@ var EventApplication = React.createClass({
   getInitialState: function() {
     return { events: [],
              sort: "name",
-             order: "asc" };
+             order: "asc",
+             page: 1,
+             pages: 0 };
   },
   componentDidMount: function() {
-    this.getDataFromApi();
+    this.getDataFromApi(this.state.page);
   },
-  getDataFromApi: function() {
+  getDataFromApi: function(page) {
     var self = this;
     $.ajax({
       url: '/api/events',
+      data: { page: page },
       success: function(data) {
-        self.setState({ events: data });
+        self.setState({ events: data.events, pages: parseInt(data.pages), page: parseInt(data.page) });
       },
       error: function(xhr, status, error) {
         alert('Cannot get data from API: ', error);
@@ -22,21 +25,16 @@ var EventApplication = React.createClass({
   handleSearch: function(events) {
     this.setState({ events: events });
   },
-  handleAdd: function(event) {
-    var events = this.state.events;
-    events.push(event);
-    this.setState({ events: events });
+  handleAdd: function() {
+    this.getDataFromApi(this.state.page);
+  },
+  handleDeleteRecord: function() {
+    this.getDataFromApi(this.state.page);
   },
   handleUpdateRecord: function(old_event, event) {
     var events = this.state.events.slice();
     var index = events.indexOf(old_event);
     events.splice(index, 1, event);
-    this.setState({ events: events });
-  },
-  handleDeleteRecord: function(event) {
-    var events = this.state.events.slice();
-    var index = events.indexOf(event);
-    events.splice(index, 1);
     this.setState({ events: events });
   },
   handleSortColumn: function(name, order) {
@@ -48,12 +46,16 @@ var EventApplication = React.createClass({
       data: { sort_by: name, order: order },
       method: 'GET',
       success: function(data) {
-        this.setState({ events: data, sort: name, order: order });
+        console.log(data);
+        this.setState({ events: data.events, sort: name, order: order });
       }.bind(this),
       error: function(xhr, status, error) {
         alert('Cannot sort events: ', error);
       }
     });
+  },
+  handleChangePage: function(page) {
+    this.getDataFromApi(page);
   },
   render: function() {
     return(
@@ -77,6 +79,9 @@ var EventApplication = React.createClass({
                         handleUpdateRecord={this.handleUpdateRecord}
                         handleDeleteRecord={this.handleDeleteRecord}
                         handleSortColumn={this.handleSortColumn} />
+            <Pagination page={this.state.page}
+                    pages={this.state.pages}
+                    handleChangePage={this.handleChangePage} />            
           </div>
         </div>
       </div>
