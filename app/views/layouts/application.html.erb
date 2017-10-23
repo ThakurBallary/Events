@@ -4,6 +4,8 @@
     <title>Events</title>
     <%= csrf_meta_tags %>
 
+    <%= favicon_link_tag 'reactjs-logo.png' %>
+
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
@@ -15,7 +17,7 @@
 
     <%= yield %>
 
-    <%= console %>
+    <%#= console %>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/js/mdb.min.js"></script> 
 

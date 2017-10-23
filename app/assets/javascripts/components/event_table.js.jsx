@@ -19,7 +19,7 @@ var EventTable = React.createClass({
     return(
       <div className="list">
         <div className="list-head row">
-          <div className="col-md-2 sortable">
+          <div className="col-md-3 sortable">
             <SortColumn name="name"
                         text="Name"
                         sort={this.props.sort}
@@ -47,7 +47,7 @@ var EventTable = React.createClass({
                         order={this.props.order}
                         handleSortColumn={this.handleSortColumn} />
           </div>
-          <div className="col-md-2">Actions</div>
+          <div className="col-md-1">Actions</div>
         </div>
         <div className="list-body">
           {events}

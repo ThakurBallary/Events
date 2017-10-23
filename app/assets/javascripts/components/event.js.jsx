@@ -65,7 +65,7 @@ var Event = React.createClass({
   renderForm: function() {
     return (
       <div className="row">
-        <div className="col-md-2">
+        <div className="col-md-3">
           <input name="name"
                  defaultValue={this.props.event.name} 
                  className="form-control"
@@ -93,7 +93,7 @@ var Event = React.createClass({
                  type="text"
                  ref="description" />
         </div>
-        <div className="col-md-2 mt-3">
+        <div className="col-md-1 mt-3">
           <a className="mx-1" onClick={this.handleUpdate}><i className="fa fa-check green-text px-1"></i></a>
           <a className="mx-1" onClick={this.handleToggle}><i className="fa fa-times grey-text px-1"></i></a>
         </div>
@@ -104,11 +104,11 @@ var Event = React.createClass({
     var event = this.props.event;
     return(
       <div className="row">
-        <div className="col-md-2">{event.name}</div>
+        <div className="col-md-3">{event.name}</div>
         <div className="col-md-2">{event.event_date}</div>
         <div className="col-md-3">{event.place}</div>
         <div className="col-md-3">{event.description}</div>
-        <div className="col-md-2">
+        <div className="col-md-1">
           <a className="mx-1" onClick={this.handleToggle}><i className="fa fa-pencil blue-text px-1"></i></a>
           <a className="mx-1" onClick={this.handleDelete}><i className="fa fa-trash-o red-text px-1"></i></a>
         </div>

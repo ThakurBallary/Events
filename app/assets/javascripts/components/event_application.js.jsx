@@ -60,7 +60,7 @@ var EventApplication = React.createClass({
   render: function() {
     return(
       <div className="container">
-        <h4 className="mt-2">Events</h4>
+        <h4 className="mt-2 header">Events</h4>
         <div className="row">
           <div className="col-md-12">
             <NewForm handleAdd={this.handleAdd} />
