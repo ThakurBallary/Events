@@ -12,7 +12,10 @@
 
 ActiveRecord::Schema.define(version: 20170927102844) do
 
-  create_table "events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "events", force: :cascade do |t|
     t.string "name"
     t.date "event_date"
     t.text "description"
