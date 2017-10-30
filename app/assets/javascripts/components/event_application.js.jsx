@@ -46,7 +46,6 @@ var EventApplication = React.createClass({
       data: { sort_by: name, order: order },
       method: 'GET',
       success: function(data) {
-        console.log(data);
         this.setState({ events: data.events, sort: name, order: order });
       }.bind(this),
       error: function(xhr, status, error) {

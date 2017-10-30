@@ -1,6 +1,5 @@
 var SearchForm = React.createClass({
   handleSearch: function() {
-    console.log("inside");
     var query = ReactDOM.findDOMNode(this.refs.query).value;
     var self = this;
     $.ajax({
