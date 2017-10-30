@@ -21,7 +21,8 @@
 }
 
 body {
-	/* background-color: #4a4a4a; */
+	 background-color: #4a4a4a; 
+	 color: white;
 }
 
 .header {
@@ -30,6 +31,6 @@ body {
 	color: #444;
 }
 
-.container {
-	background-color: white;
+input {
+	color: white !important;
 }
